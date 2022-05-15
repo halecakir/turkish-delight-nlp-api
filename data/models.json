@@ -1,0 +1,40 @@
+{
+  "JointModel": {
+    "model_path": "data/Turkish-jointAll-MTAG_COMP=w_sum-MORPH_COMP=w_sum-POS_COMP=w_sum-COMP_ALPHA=0.1-trialmodel",
+    "model_opts_path" : "data/Turkish-jointAll-MTAG_COMP=w_sum-MORPH_COMP=w_sum-POS_COMP=w_sum-COMP_ALPHA=0.1-trialmodel.params",
+    "description": "Deep learning model for morphological segmentation, morpheme tagging, part-of-speech (POS) tagging, and syntactic parsing onto dependencies, using cross-level contextual information flow for every word, from segments to dependencies, with an attention mechanism at horizontal flow.",
+    "code" : "https://github.com/halecakir/JointParser",
+    "paper" :"https://wlv.openrepository.com/handle/2436/624440",
+    "bibtex" : "@article{can2022joint,\ntitle={Joint learning of morphology and syntax with\ncross-level contextual information flow},\nauthor={Can Buglalilar, Burcu and\n\tAlecakir, Huseyin and\n\tManandhar, Suresh and\n\tBozsahin, Cem},\nyear={2022},\npublisher={Cambridge University Press}}",
+    "citation" : "Can, B., Alecakir, H., Manandhar, S. and Bozsahin, C.\n(in press) Joint learning of morphology and syntax with \ncross-level contextual information flow.\nNatural Language Engineering.",
+    "deafult_sentence" : "O iyi insanlar o güzel atlara binip çekip gittiler"
+    },
+  "SemanticParser": {
+      "model_path": "data/semantic_parser",
+      "description": "The semantic parser is an ncoder/decoder model that solves the task as chart-based constituency parsing. Self-attention layers are used as the encoder with an MLP classifier with two fully-connected layers with ReLU activation function, and the CYK algorithm is used in the decoder that generates the tree with the maximum score using the scores obtained from the encoder. The model is trained on a merged English, German and French UCCA dataset. The features (PoS tag, dependency label) are extracted by Stana library and used in the input layer of the model.",
+      "code" : "https://github.com/necvabolucu/ucca-parser",
+      "paper" :"https://arxiv.org/abs/2110.00621",
+      "bibtex" : "@article{bolucu2021self,title={Self-Attentive Constituency Parsing for UCCA-based Semantic Parsing},author={B{\"o}l{\"u}c{\"u}, Necva and Can, Burcu},journal={arXiv preprint arXiv:2110.00621},year={2021}}",
+      "citation" : "Bölücü, N., & Can, B. (2021). Self-Attentive Constituency Parsing for UCCA-based Semantic Parsing. arXiv preprint arXiv:2110.00621.",
+      "deafult_sentence" : "O iyi insanlar o güzel atlara binip çekip gittiler"
+    },
+  "Stemmer": {
+    "model_path": "data/saved-model-stemmer",
+    "description": "The stemmer is built on an LSTM network with an attention mechanism that identifies the stem based on the characters of a word. The model is trained on the word list obtained from METU-Sabanci Treebank.",
+    "code" : "https://github.com/burcu-can/Stemmer/",
+    "paper" : "https://dergipark.org.tr/tr/download/article-file/775805",
+    "bibtex" : "@article{burcu2019lstm,\ntitle={Lstm aglari ile Turkce kok bulma},\nauthor={Burcu, Can},\njournal={Bilisim Teknolojileri Dergisi},\nvolume={12},\nnumber={3},\npages={183--193},\nyear={2019}}",
+    "citation" : "Burcu Can. Stemming Turkish Words with LSTM Networks. Bilişim Teknolojileri Dergisi. July 2019, Vol.12, No:3.",
+    "deafult_sentence" : "O iyi insanlar o güzel atlara binip çekip gittiler"
+    },
+  "NER": {
+    "model_path": "data/model.weights/",
+    "model_opts_path": "data/ner-data",
+    "description": "The Named Entity Recognition model is based on BiLSTM-CRF architecture, where different levels of neural embeddings are incorporated. Those embeddings include word embeddings, character embeddings, morpheme embeddings, and orthographic embeddings. There are two versions of the same architecture available. First one is only trained on noisy text, whereas the second model is trained with transfer learning that is jointly trained on both formal and noisy text with shared BiLSTM layers but separate CRF layers.",
+    "code" : "https://github.com/emrekgn/turkish-ner",
+    "paper" : "https://wlv.openrepository.com/bitstream/handle/2436/623614/Can_Transfer_Learning_For_2020.pdf?sequence=3",
+    "bibtex" : "@article{akkaya2021transfer,\ntitle={Transfer learning for Turkish named entity\n recognition on noisy text},\nauthor={Akkaya, Emre Kagan and Can, Burcu},\njournal={Natural Language Engineering},\nvolume={27},\nnumber={1},\npages={35--64},\nyear={2021},\npublisher={Cambridge University Press}}",
+    "citation" : "Emre Kağan Akkaya and Burcu Can. Transfer Learning for Turkish Named Entity Recognition on Noisy Text. The Journal of Natural Language Engineering, Cambridge University Press. 2020",
+    "deafult_sentence" : "Fener ile Samsunspor Çarşamba günü Şükrü Saraçoğlu Stadyumu'nda maç yaptılar"
+    }
+}

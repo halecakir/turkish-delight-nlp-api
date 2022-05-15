@@ -1,0 +1,4 @@
+venv/
+*.code-workspace
+venvpy37/
+.tox/
