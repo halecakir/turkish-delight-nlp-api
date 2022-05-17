@@ -65,7 +65,7 @@ def predict_semantic(ucca_parser, sentence):
         collate_fn=collate_fn,
     )
     ucca_file = prediction(ucca_parser, test_loader)
-    return {"ucca_xml" :  convert_xml(ucca_file[0]), "sentence" : split2sentences}
+    return {"ucca_xml" :  convert_xml(ucca_file[0]), "sentence" : sentence}
 
 
 def convert_xml(passage):
