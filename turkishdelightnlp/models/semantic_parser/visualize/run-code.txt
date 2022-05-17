@@ -1,0 +1,13 @@
+Requirements 
+
+matplotlib==3.3.3
+networkx>=2.0
+
+
+Run code
+
+Folder contains UCCA xml files
+or only 1 UCCA xml file
+
+python visualize.py folder 
+python visualize.py file

@@ -2,9 +2,17 @@ from pydantic import BaseModel
 
 
 class NERPredictionResult(BaseModel):
-    words: str
+    ents: list
     sentence: str
 
+class SemanticParserPredictionResult(BaseModel):
+    ucca_xml: str
+    sentence: str
+
+class StemmerPredictionResult(BaseModel):
+    words: list
+    stems: list
+    sentence: str
 
 class JointPredictionResult(BaseModel):
     conllu: str

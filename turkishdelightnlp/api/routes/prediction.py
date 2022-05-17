@@ -1,17 +1,16 @@
 from fastapi import APIRouter, Depends
 from starlette.requests import Request
-
-from turkishdelightnlp.core import security
-from turkishdelightnlp.common.payload import SentencePayload
 from turkishdelightnlp.common.enums import JointModelSubTypes, ModelTypes
+from turkishdelightnlp.common.payload import SentencePayload
 from turkishdelightnlp.common.prediction import (
-    JointPredictionResult,
-    POSTaggingPredictionResult,
-    MorphemeSegmentationPredictionResult,
-    MorphemeTaggingPredictionResult,
-    DependencyPredictionResult,
-)
-from turkishdelightnlp.services.models import JointModel
+    DependencyPredictionResult, JointPredictionResult,
+    MorphemeSegmentationPredictionResult, MorphemeTaggingPredictionResult,
+    NERPredictionResult, POSTaggingPredictionResult,
+    SemanticParserPredictionResult, StemmerPredictionResult)
+from turkishdelightnlp.core import security
+from turkishdelightnlp.services.models import (JointModel, NERModel,
+                                               SemanticParserModel,
+                                               StemmerModel)
 
 router = APIRouter()
 
@@ -25,8 +24,8 @@ def joint_predict(
 
     model: JointModel = request.app.state.model[str(ModelTypes.JOINT)]
     prediction: JointPredictionResult = model.predict(
-        block_data.sentence, submodel_type=str(
-            JointModelSubTypes.JOINT))
+        block_data.sentence, submodel_type=str(JointModelSubTypes.JOINT)
+    )
 
     return prediction
 
@@ -101,5 +100,58 @@ def dependency_parsing_predict(
     prediction: DependencyPredictionResult = model.predict(
         block_data.sentence, submodel_type=str(JointModelSubTypes.DEPENDENCY)
     )
+
+    return prediction
+
+
+@router.post(
+    "/semantic_parsing",
+    response_model=SemanticParserPredictionResult,
+    name="semantic_parsing",
+)
+def semantic_parsing_predict(
+    request: Request,
+    authenticated: bool = Depends(security.validate_request),
+    block_data: SentencePayload = None,
+) -> SemanticParserPredictionResult:
+
+    model: SemanticParserModel = request.app.state.model[
+        str(ModelTypes.SEMANTIC_PARSING)
+    ]
+    prediction: SemanticParserPredictionResult = model.predict(block_data.sentence)
+
+    return prediction
+
+
+@router.post(
+    "/ner",
+    response_model=NERPredictionResult,
+    name="ner",
+)
+def ner_predict(
+    request: Request,
+    authenticated: bool = Depends(security.validate_request),
+    block_data: SentencePayload = None,
+) -> NERPredictionResult:
+
+    model: NERModel = request.app.state.model[str(ModelTypes.NER)]
+    prediction: NERPredictionResult = model.predict(block_data.sentence)
+
+    return prediction
+
+
+@router.post(
+    "/stemmer",
+    response_model=StemmerPredictionResult,
+    name="stemmer",
+)
+def ner_predict(
+    request: Request,
+    authenticated: bool = Depends(security.validate_request),
+    block_data: SentencePayload = None,
+) -> StemmerPredictionResult:
+
+    model: StemmerModel = request.app.state.model[str(ModelTypes.STEMMER)]
+    prediction: StemmerPredictionResult = model.predict(block_data.sentence)
 
     return prediction

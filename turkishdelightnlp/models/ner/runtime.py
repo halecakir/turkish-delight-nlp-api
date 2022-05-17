@@ -11,7 +11,7 @@ def load_model(model_path, model_opts_path):
 
 
 def predict_ner(model, sentence):
-    doc = {"text": sentence, "ents": [], "title": None}
+    doc = {"sentence": sentence, "ents": []}
 
     tokens = sentence.split()
     preds = model.predict_ner(tokens)

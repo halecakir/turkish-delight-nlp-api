@@ -9,7 +9,7 @@ def load_model(model_path):
 
 
 def predict_stems(model, document):
-    doc = {"words": [], "stems": []}
+    doc = {"words": [], "stems": [], "sentence" : document}
     for word in document.split():
         word = word.lower()
         doc["words"].append(word)
